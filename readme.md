@@ -11,18 +11,19 @@ Step-by-step install instructions:
 4
 
 ```
-sudo apt-get update
-sudo apt-get install build-essential libssl-dev curl -y
+[sudo] apt-get update
+[sudo] apt-get install build-essential libssl-dev curl -y
 curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
 bash install_nvm.sh
-sudo reboot
+[sudo] reboot
 
 nvm install 8.0.0
 
 git clone https://github.com/3s3s/opentrade.git
 cd opentrade
 
-sudo npm install 
+[sudo] npm install 
+[sudo] npm install -g forever
 ```
 
 ## Here is an example of the file ~/opentrade/server/modules/private_constants.js Edit with your configs.
@@ -44,11 +45,13 @@ exports.walletspassphrase = {
 **After, you can run exchange**
 
 ```
+cd ~/opentrade/databaseServer
+[sudo] forever start main.js
 cd  ~/opentrade/server
-sudo node main.js
+[sudo] forever start main.js
 ```
 
-In your browser address bar, type https://127.0.0.1:40443
+In your browser address bar, type https://127.0.0.1
 You will see OpenTrade.
 
 The first registered user will be exchange administrator. 
@@ -102,25 +105,24 @@ File ~/opentrade/server/constants.js have settings that you can change
 https://github.com/3s3s/opentrade/blob/master/server/constants.js
 
 ```
-exports.TRADE_MAIN_COIN = "Marycoin"; //change Marycoin to your main coin pair
-exports.TRADE_DEFAULT_PAIR = "Litecoin"; //change Litecoin to your default coin pair
-exports.TRADE_COMISSION = 0.001; //change trade comission percent
-
-exports.recaptcha_pub_key = "6LeX5SQUAAAAAKTieM68Sz4MECO6kJXsSR7_sGP1"; //change to your recaptcha public key
-
 exports.NOREPLY_EMAIL = 'no-reply@multicoins.org'; //change no-reply email
 exports.SUPPORT_EMAIL = 'ivanivanovkzv@gmail.com'; //change to your valid email for support requests
-exports.my_portSSL = 40443; //change to your ssl port
+const DOMAIN = 'localhost'; //Change to your domain name
+
+exports.TRADE_MAIN_COIN = "Marycoin"; //change Marycoin to your main coin pair
+exports.TRADE_DEFAULT_PAIR = "Litecoin"; //change Litecoin to your default coin pair
+exports.share.TRADE_COMISSION = 0.001; //change trade comission percent
+exports.share.DUST_VOLUME = 0.000001; //change minimal order volume
+
+exports.recaptcha_pub_key = "6LeX5SQUAAAAAKTieM68Sz4MECO6kJXsSR7_sGP1"; //change to your recaptcha public key
 
 ```
 
 File ~/opentrade/static_pages/chart.html
 
-https://github.com/3s3s/opentrade/blob/master/static_pages/chart.html#L23
-
 ```
 const PORT_SSL = 40443; //change to your ssl port
-const MAIN_COIN = 'Greencoin'; //change Greencoin to your main coin pair same as in constants.js
+const MAIN_COIN = 'Marycoin'; //change Marycoin to your main coin pair same as in constants.js
 const DEFAULT_PAIR = 'Litecoin'; //change Litecoin to your default coin pair same as in constants.js
       
 const TRADE_COMISSION = 0.001;
@@ -129,6 +131,14 @@ const TRADE_COMISSION = 0.001;
 After that, you coins should appear on the main page.
 
 
+
+**Donate**
+If you find this script is useful then consider donate please
+
+Bitcoin 36WA1WESULub6Q434bQcnmpnk62oLD7vuQ
+Marycoin M9dKNcBYgrbbE2f4tz3ud32KLKj1i9FrmN
+Dogecoin DCJRhs9Pjr2FBrrUbKvFeWcYC6ZaF2GTAx
+Litecoin LTbDdTijroJEyXt27apQSnuMY4RoXyjdq2
 
 
 
