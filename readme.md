@@ -2,6 +2,7 @@
 
 Live version: https://trade.multicoins.org/
 
+Alternative User Interface: dogebithelp@gmail.com
 
 Step-by-step install instructions:
 
@@ -17,10 +18,12 @@ curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o 
 bash install_nvm.sh
 [sudo] reboot
 
-nvm install 8.0.0
+nvm install 12.6.0
 
 git clone --recurse-submodules https://github.com/3s3s/opentrade.git
-cd opentrade
+cd opentrade/accountsserver
+git checkout master
+cd ..
 
 [sudo] npm install 
 [sudo] npm install -g forever
@@ -50,6 +53,7 @@ exports.walletspassphrase = {
 cd ~/opentrade/databaseServer
 [sudo] forever start main.js
 cd ~/opentrade/accountsserver
+git checkout master
 [sudo] forever start main.js
 cd  ~/opentrade/server
 [sudo] forever start main.js
@@ -95,7 +99,7 @@ Also, you must encrypt your cryptocurrency wallet with this command.
 *If coin is not supported by encryption (like ZerroCash and it forks) the coin can not be added to OpenTrade.*
 
 
-Add you coin details to OpenTrade
+Add your coin details to OpenTrade
 
 1. Register on exchange. The first registered user will be exchange administrator.
 2. Go to "Admin Area" -> "Coins" -> "Add coin"
